@@ -34,6 +34,11 @@ export const TRAINING_COORDINATOR = {
   phone: '+91 9847 760 582',
 } as const;
 
+export const SPORTS_COORDINATORS = [
+  { name: 'Mohamed Abdulla', phone: '+91 9447 304 615' },
+  { name: 'Shimjith Methatta', phone: '+91 9744 195 504' },
+] as const;
+
 export const DEFAULTS = {
   openCategories: {
     categories: empty(12),

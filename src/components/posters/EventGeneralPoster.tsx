@@ -2,7 +2,7 @@ import type { EventGeneralData } from '../../types';
 import { PosterHeader } from '../shared/PosterHeader';
 import { PosterFooter } from '../shared/PosterFooter';
 import { VenueImage } from '../shared/VenueImage';
-import { EVENTS_COORDINATORS, TRAINING_COORDINATOR } from '../../data/defaults';
+import { EVENTS_COORDINATORS, TRAINING_COORDINATOR, SPORTS_COORDINATORS } from '../../data/defaults';
 
 type Props = { data: EventGeneralData };
 
@@ -55,6 +55,20 @@ export function EventGeneralPoster({ data }: Props) {
               {TRAINING_COORDINATOR.name.toUpperCase()}
             </div>
             <div className="text-base text-white/85 mt-0.5">{TRAINING_COORDINATOR.phone}</div>
+          </div>
+        ) : data.categoryLabel === 'SPORTS MEET' ? (
+          <div className="text-center">
+            <div className="text-bni-gold text-[11px] tracking-[0.4em] font-semibold mb-1">
+              SPORTS COORDINATORS
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {SPORTS_COORDINATORS.map((c) => (
+                <div key={c.name}>
+                  <div className="font-display text-xl tracking-wide">{c.name.toUpperCase()}</div>
+                  <div className="text-sm text-white/75">{c.phone}</div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-3 text-center">
