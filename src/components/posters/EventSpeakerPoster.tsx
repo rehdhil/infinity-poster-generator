@@ -1,4 +1,4 @@
-import type { EventSpeakerData } from '../../types';
+import type { EventSpeakerData, EventSpeakerProfile } from '../../types';
 import { PosterHeader } from '../shared/PosterHeader';
 import { PosterFooter } from '../shared/PosterFooter';
 import { Headshot } from '../shared/Headshot';
@@ -9,22 +9,20 @@ import { EVENTS_COORDINATORS } from '../../data/defaults';
 type Props = { data: EventSpeakerData };
 
 export function EventSpeakerPoster({ data }: Props) {
+  const hasTwo = !!data.speakerTwo;
+
   return (
     <div className="flex h-full flex-col">
       <PosterHeader label={data.eventTypeLabel || 'GUEST SPEAKER'} />
 
-      <div className="mx-auto mt-2">
-        <Headshot src={data.headshotUrl} size={380} ringWidth={8} />
-      </div>
-
-      <div className="text-center mt-6">
-        <div className="font-display text-5xl tracking-wide">
-          {data.speakerName || 'SPEAKER NAME'}
+      {hasTwo ? (
+        <div className="grid grid-cols-2 gap-10 px-12 mt-2">
+          <SpeakerBlock speaker={data.speakerOne} size={280} />
+          <SpeakerBlock speaker={data.speakerTwo!} size={280} />
         </div>
-        <div className="text-bni-gold text-xl tracking-[0.3em] mt-2">
-          {data.designation || 'Designation'}
-        </div>
-      </div>
+      ) : (
+        <SpeakerBlock speaker={data.speakerOne} size={380} centered />
+      )}
 
       <Divider />
 
@@ -57,6 +55,31 @@ export function EventSpeakerPoster({ data }: Props) {
           ))}
         </div>
       </PosterFooter>
+    </div>
+  );
+}
+
+function SpeakerBlock({
+  speaker,
+  size,
+  centered = false,
+}: {
+  speaker: EventSpeakerProfile;
+  size: number;
+  centered?: boolean;
+}) {
+  const nameSize = size >= 360 ? 'text-5xl' : 'text-3xl';
+  const desigSize = size >= 360 ? 'text-xl' : 'text-base';
+  const wrapper = centered ? 'mx-auto mt-2 flex flex-col items-center text-center' : 'flex flex-col items-center text-center';
+  return (
+    <div className={wrapper}>
+      <Headshot src={speaker.headshotUrl} size={size} ringWidth={size >= 360 ? 8 : 6} />
+      <div className={`mt-5 font-display ${nameSize} tracking-wide leading-tight`}>
+        {speaker.name || 'SPEAKER NAME'}
+      </div>
+      <div className={`text-bni-gold ${desigSize} tracking-[0.3em] mt-2 leading-tight`}>
+        {speaker.designation || 'Designation'}
+      </div>
     </div>
   );
 }

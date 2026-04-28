@@ -80,9 +80,7 @@ export const DEFAULTS = {
 
   eventSpeaker: {
     eventTypeLabel: 'GUEST SPEAKER',
-    speakerName: '',
-    designation: '',
-    headshotUrl: '',
+    speakerOne: { name: '', designation: '', headshotUrl: '' },
     talkTitle: '',
     date: '',
     time: '7:00 PM',

@@ -74,11 +74,17 @@ export interface EventGeneralData {
   venueImageUrl?: string;
 }
 
-export interface EventSpeakerData {
-  eventTypeLabel: string;
-  speakerName: string;
+export interface EventSpeakerProfile {
+  name: string;
   designation: string;
   headshotUrl: string;
+}
+
+export interface EventSpeakerData {
+  eventTypeLabel: string;
+  speakerOne: EventSpeakerProfile;
+  /** Optional second speaker — renders side-by-side when present. */
+  speakerTwo?: EventSpeakerProfile;
   talkTitle: string;
   date: string;
   time: string;
