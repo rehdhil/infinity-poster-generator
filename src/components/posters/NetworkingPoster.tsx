@@ -36,7 +36,7 @@ export function NetworkingPoster({ data }: Props) {
         Online Networking Coordinators
       </div>
 
-      <div className="mt-8 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-32 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 

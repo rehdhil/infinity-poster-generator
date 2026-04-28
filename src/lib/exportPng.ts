@@ -23,19 +23,6 @@ export async function exportPosterPng(
   const imgs = Array.from(node.querySelectorAll('img'));
   const badImgs = imgs.filter(isBadSrc);
 
-  // Log every image so the cause is visible in the console.
-  console.log(
-    '[exportPosterPng] image tree:',
-    imgs.map((img, i) => ({
-      idx: i,
-      src: img.src,
-      attrSrc: img.getAttribute('src'),
-      bad: isBadSrc(img),
-      complete: img.complete,
-      naturalWidth: img.naturalWidth,
-    })),
-  );
-
   // Defensively hide any image with an empty/root src for the duration of the export.
   // This prevents html-to-image from failing the whole render because of a single bad node.
   const hidden: { el: HTMLImageElement; prev: string }[] = [];
