@@ -20,10 +20,24 @@ export function Headshot({ src, size, ringWidth = 6 }: Props) {
           width: '100%',
           height: '100%',
           borderRadius: '9999px',
-          background: src ? `url(${src}) center/cover` : '#1a1a1a',
+          overflow: 'hidden',
+          background: '#1a1a1a',
           border: '2px solid #0A0A0A',
         }}
-      />
+      >
+        {src && (
+          <img
+            src={src}
+            alt=""
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }
