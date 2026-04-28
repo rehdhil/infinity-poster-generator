@@ -16,7 +16,6 @@ export function VenueImage({ src, variant }: Props) {
         src={src}
         alt="Venue"
         className="h-full w-full object-cover"
-        crossOrigin="anonymous"
       />
       <div
         className="pointer-events-none absolute inset-0"
