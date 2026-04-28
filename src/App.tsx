@@ -1,122 +1,99 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useRef, useState } from 'react';
+import type { PosterKind } from './types';
+import { DEFAULTS } from './data/defaults';
+import { PosterFrame } from './components/PosterFrame';
+import { TemplatePicker } from './components/TemplatePicker';
+import { DownloadButton } from './components/DownloadButton';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { OpenCategoriesPoster } from './components/posters/OpenCategoriesPoster';
+import { FeatureOnlinePoster } from './components/posters/FeatureOnlinePoster';
+import { PowerTeamPoster } from './components/posters/PowerTeamPoster';
+import { NetworkingPoster } from './components/posters/NetworkingPoster';
+import { EducationPoster } from './components/posters/EducationPoster';
+import { EventGeneralPoster } from './components/posters/EventGeneralPoster';
+import { EventSpeakerPoster } from './components/posters/EventSpeakerPoster';
+
+import { OpenCategoriesForm } from './components/forms/OpenCategoriesForm';
+import { FeatureOnlineForm } from './components/forms/FeatureOnlineForm';
+import { PowerTeamForm } from './components/forms/PowerTeamForm';
+import { NetworkingForm } from './components/forms/NetworkingForm';
+import { EducationForm } from './components/forms/EducationForm';
+import { EventGeneralForm } from './components/forms/EventGeneralForm';
+import { EventSpeakerForm } from './components/forms/EventSpeakerForm';
+
+const FILENAMES: Record<PosterKind, string> = {
+  'open-categories': 'bni-open-categories',
+  'feature-online': 'bni-feature-online',
+  'power-team': 'bni-power-team',
+  'networking': 'bni-networking',
+  'education': 'bni-education',
+  'event-general': 'bni-event-general',
+  'event-speaker': 'bni-event-speaker',
+};
+
+export default function App() {
+  const [kind, setKind] = useState<PosterKind>('open-categories');
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  const [openCategories, setOpenCategories] = useState(DEFAULTS.openCategories);
+  const [featureOnline, setFeatureOnline] = useState(DEFAULTS.featureOnline);
+  const [powerTeam, setPowerTeam] = useState(DEFAULTS.powerTeam);
+  const [networking, setNetworking] = useState(DEFAULTS.networking);
+  const [education, setEducation] = useState(DEFAULTS.education);
+  const [eventGeneral, setEventGeneral] = useState(DEFAULTS.eventGeneral);
+  const [eventSpeaker, setEventSpeaker] = useState(DEFAULTS.eventSpeaker);
+
+  const renderPoster = () => {
+    switch (kind) {
+      case 'open-categories': return <OpenCategoriesPoster data={openCategories} />;
+      case 'feature-online': return <FeatureOnlinePoster data={featureOnline} />;
+      case 'power-team': return <PowerTeamPoster data={powerTeam} />;
+      case 'networking': return <NetworkingPoster data={networking} />;
+      case 'education': return <EducationPoster data={education} />;
+      case 'event-general': return <EventGeneralPoster data={eventGeneral} />;
+      case 'event-speaker': return <EventSpeakerPoster data={eventSpeaker} />;
+    }
+  };
+
+  const renderForm = () => {
+    switch (kind) {
+      case 'open-categories': return <OpenCategoriesForm data={openCategories} onChange={setOpenCategories} />;
+      case 'feature-online': return <FeatureOnlineForm data={featureOnline} onChange={setFeatureOnline} />;
+      case 'power-team': return <PowerTeamForm data={powerTeam} onChange={setPowerTeam} />;
+      case 'networking': return <NetworkingForm data={networking} onChange={setNetworking} />;
+      case 'education': return <EducationForm data={education} onChange={setEducation} />;
+      case 'event-general': return <EventGeneralForm data={eventGeneral} onChange={setEventGeneral} />;
+      case 'event-speaker': return <EventSpeakerForm data={eventSpeaker} onChange={setEventSpeaker} />;
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen p-6 lg:p-10">
+      <header className="mb-6">
+        <h1 className="font-display text-4xl tracking-wider">
+          BNI Infinity Poster Generator
+        </h1>
+        <p className="text-white/60 text-sm mt-1">
+          Pick a template, fill the form, download the WhatsApp Status poster.
+        </p>
+      </header>
 
-      <div className="ticks"></div>
+      <TemplatePicker active={kind} onChange={setKind} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <div className="mt-8 grid gap-8 lg:grid-cols-[400px_1fr]">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+          {renderForm()}
+          <div className="mt-6">
+            <DownloadButton targetRef={targetRef} filename={FILENAMES[kind]} />
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <div className="flex justify-center">
+          <PosterFrame ref={targetRef} previewScale={0.4}>
+            {renderPoster()}
+          </PosterFrame>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-export default App
