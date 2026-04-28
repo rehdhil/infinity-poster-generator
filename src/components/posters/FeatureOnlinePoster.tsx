@@ -14,12 +14,13 @@ export function FeatureOnlinePoster({ data }: Props) {
         THIS WEDNESDAY • {data.date || '[DATE]'}
       </div>
 
-      <div className="grid grid-cols-2 gap-12 px-12 mt-14">
+      {/* Hero: 2 large speaker headshots — visual anchor */}
+      <div className="grid grid-cols-2 gap-8 px-10 mt-10">
         <SpeakerBlock speaker={data.speakerOne} />
         <SpeakerBlock speaker={data.speakerTwo} />
       </div>
 
-      <div className="mt-auto mb-44 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 
@@ -32,7 +33,7 @@ function SpeakerBlock({ speaker }: { speaker: SpeakerProfile }) {
   return (
     <div className="flex flex-col items-center text-center">
       <Headshot src={speaker.headshotUrl} size={420} ringWidth={8} />
-      <div className="mt-6 font-display text-4xl leading-tight">
+      <div className="mt-4 font-display text-4xl leading-tight">
         {speaker.name || 'SPEAKER NAME'}
       </div>
       <div className="mt-2 text-2xl text-white/90 leading-tight">

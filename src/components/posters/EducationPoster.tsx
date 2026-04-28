@@ -11,8 +11,9 @@ export function EducationPoster({ data }: Props) {
     <div className="flex h-full flex-col">
       <PosterHeader label="EDUCATION SLOT" />
 
-      <div className="mx-auto mt-4">
-        <Headshot src={data.headshotUrl} size={420} ringWidth={8} />
+      {/* Hero: large central headshot */}
+      <div className="mx-auto mt-2">
+        <Headshot src={data.headshotUrl} size={360} ringWidth={8} />
       </div>
 
       <div className="text-center mt-6">
@@ -31,12 +32,12 @@ export function EducationPoster({ data }: Props) {
       </div>
 
       <div className="px-10 text-center">
-        <div className="font-display text-[80px] leading-none tracking-wide">
+        <div className="font-display text-[76px] leading-none tracking-wide">
           {data.topic ? `"${data.topic}"` : '[TOPIC]'}
         </div>
       </div>
 
-      <div className="mt-auto mb-44 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 

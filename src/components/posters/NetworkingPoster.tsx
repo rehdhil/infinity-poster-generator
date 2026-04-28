@@ -11,10 +11,11 @@ export function NetworkingPoster({ data }: Props) {
     <div className="flex h-full flex-col">
       <PosterHeader label="NETWORKING SESSION" />
 
-      <div className="text-center text-bni-gold tracking-[0.5em] text-xl mb-5 font-semibold">
+      <div className="text-center text-bni-gold tracking-[0.5em] text-xl mb-4 font-semibold">
         THIS WEEK&apos;S TOPIC
       </div>
 
+      {/* Hero: large topic quote — ~50% of canvas */}
       <div className="px-10 text-center">
         <div className="font-display text-[88px] leading-none tracking-wide">
           {data.topic ? `"${data.topic}"` : '[TOPIC]'}
@@ -23,11 +24,11 @@ export function NetworkingPoster({ data }: Props) {
 
       <Divider />
 
-      <div className="text-center text-bni-gold tracking-[0.4em] text-xl mb-6 font-semibold">
+      <div className="text-center text-bni-gold tracking-[0.4em] text-xl mb-4 font-semibold">
         HOSTED BY
       </div>
 
-      <div className="grid grid-cols-2 gap-12 px-12">
+      <div className="grid grid-cols-2 gap-10 px-12">
         <HostBlock host={data.hostOne} />
         <HostBlock host={data.hostTwo} />
       </div>
@@ -36,7 +37,7 @@ export function NetworkingPoster({ data }: Props) {
         Online Networking Coordinators
       </div>
 
-      <div className="mt-auto mb-32 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 
@@ -48,7 +49,7 @@ export function NetworkingPoster({ data }: Props) {
 function HostBlock({ host }: { host: HostProfile }) {
   return (
     <div className="flex flex-col items-center">
-      <Headshot src={host.headshotUrl} size={260} />
+      <Headshot src={host.headshotUrl} size={240} />
       <div className="mt-4 font-display text-3xl text-center">
         {host.name || 'HOST NAME'}
       </div>

@@ -13,24 +13,25 @@ export function OpenCategoriesPoster({ data }: Props) {
         JOIN INDIA&apos;S FASTEST GROWING<br />BUSINESS NETWORK
       </p>
 
-      <div className="grid grid-cols-2 gap-4 px-10 mt-12">
+      {/* Hero: 12-pill 2×6 grid — ~55% of canvas */}
+      <div className="grid grid-cols-2 gap-3 px-10 mt-8">
         {data.categories.map((cat, i) => (
           <div
             key={i}
-            className="flex h-24 items-center justify-center rounded-xl border-2 border-bni-red/80 bg-black/40 px-4 text-center font-display text-4xl leading-tight tracking-wide text-white"
+            className="flex h-20 items-center justify-center rounded-xl border-2 border-bni-red/80 bg-black/40 px-4 text-center font-display text-4xl leading-tight tracking-wide text-white"
           >
             {cat || ' '}
           </div>
         ))}
       </div>
 
-      <div className="mt-14 px-12 text-center">
+      <div className="mt-8 px-12 text-center">
         <h2 className="font-display text-5xl tracking-widest text-bni-red">
           REFER SOMEONE YOU KNOW
         </h2>
       </div>
 
-      <div className="text-center mt-6 font-display text-3xl tracking-[0.3em] text-white/85">
+      <div className="mt-auto mb-56 text-center font-display text-3xl tracking-[0.3em] text-white/85">
         VISIT US WED • {data.time}
       </div>
 

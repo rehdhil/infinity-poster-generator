@@ -4,16 +4,16 @@ import type { PosterKind } from './types';
 export const POSTER_WIDTH = 1080;
 export const POSTER_HEIGHT = 1920;
 
-/** Per-template canvas dimensions. Square templates use 1080x1080. */
+/** Per-template canvas dimensions. Square templates use 1080x1080. 4:5 vertical = 1080x1350. */
 export const POSTER_DIMENSIONS: Record<PosterKind, { width: number; height: number }> = {
-  'open-categories': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'feature-online': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'power-team': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'networking': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'education': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'event-general': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'event-speaker': { width: 1080, height: 1080 },
-  'theme': { width: 1080, height: 1080 },
+  'open-categories': { width: 1080, height: 1350 },
+  'feature-online':  { width: 1080, height: 1350 },
+  'power-team':      { width: 1080, height: 1350 },
+  'networking':      { width: 1080, height: 1350 },
+  'education':       { width: 1080, height: 1350 },
+  'event-general':   { width: 1080, height: 1350 },
+  'event-speaker':   { width: 1080, height: 1080 },
+  'theme':           { width: 1080, height: 1080 },
 };
 
 export const COLORS = {
