@@ -13,11 +13,11 @@ export function OpenCategoriesPoster({ data }: Props) {
         JOIN INDIA&apos;S FASTEST GROWING<br />BUSINESS NETWORK
       </p>
 
-      <div className="grid grid-cols-3 gap-4 px-10 mt-12">
+      <div className="grid grid-cols-2 gap-4 px-10 mt-12">
         {data.categories.map((cat, i) => (
           <div
             key={i}
-            className="flex h-24 items-center justify-center rounded-xl border-2 border-bni-red/80 bg-black/40 px-3 text-center font-display text-2xl leading-tight tracking-wide text-white"
+            className="flex h-24 items-center justify-center rounded-xl border-2 border-bni-red/80 bg-black/40 px-4 text-center font-display text-4xl leading-tight tracking-wide text-white"
           >
             {cat || ' '}
           </div>
