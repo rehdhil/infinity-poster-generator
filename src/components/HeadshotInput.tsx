@@ -6,14 +6,22 @@ type Props = {
   onChange: (blobUrl: string) => void;
 };
 
+/** Detects touch-only devices (no hover, coarse pointer) — phones and tablets. */
+function detectTouchOnly(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+}
+
 export function HeadshotInput({ label, value, onChange }: Props) {
   const lastUrl = useRef(value);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const zoneRef = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [touchOnly, setTouchOnly] = useState(false);
 
   useEffect(() => {
+    setTouchOnly(detectTouchOnly());
     return () => {
       if (lastUrl.current && lastUrl.current.startsWith('blob:')) {
         URL.revokeObjectURL(lastUrl.current);
@@ -53,16 +61,28 @@ export function HeadshotInput({ label, value, onChange }: Props) {
     if (file) ingest(file);
   };
 
+  const handleZoneClick = () => {
+    // On touch devices keyboard paste is meaningless, so tap = open photo picker.
+    // On desktop, focus the zone so ⌘V can target it.
+    if (touchOnly) {
+      fileInputRef.current?.click();
+    } else {
+      zoneRef.current?.focus();
+    }
+  };
+
+  const replaceVerb = touchOnly ? 'Tap to replace' : 'Click to focus, then paste / drop a new image';
+
   return (
     <div className="space-y-1">
       <div className="text-sm text-white/70">{label}</div>
       <div
         ref={zoneRef}
-        tabIndex={0}
+        tabIndex={touchOnly ? -1 : 0}
         onPaste={handlePaste}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        onClick={() => zoneRef.current?.focus()}
+        onClick={handleZoneClick}
         onDragOver={(e) => {
           e.preventDefault();
           if (!dragOver) setDragOver(true);
@@ -93,12 +113,16 @@ export function HeadshotInput({ label, value, onChange }: Props) {
         <div className="flex-1 text-xs leading-snug text-white/65">
           {dragOver ? (
             <span className="text-white/95 font-medium">Drop to upload</span>
+          ) : touchOnly ? (
+            <span className="text-white/90">
+              {value ? replaceVerb : 'Tap to upload from your photos'}
+            </span>
           ) : focused ? (
             <span className="text-white/90">
               Press <kbd className="rounded border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] text-white">⌘V</kbd> to paste · or drop a file here
             </span>
           ) : value ? (
-            <span>Click to focus, then paste / drop a new image — or use Choose file</span>
+            <span>{replaceVerb}</span>
           ) : (
             <span>Click to focus then paste, drop a file, or pick one →</span>
           )}
@@ -110,15 +134,15 @@ export function HeadshotInput({ label, value, onChange }: Props) {
             e.stopPropagation();
             fileInputRef.current?.click();
           }}
-          className="shrink-0 rounded border border-white/20 px-2 py-1 text-xs text-white/85 hover:border-bni-red hover:text-white"
+          className="shrink-0 rounded border border-white/20 px-3 py-1.5 text-xs font-medium text-white/85 hover:border-bni-red hover:text-white"
         >
-          Choose file
+          {touchOnly ? 'Browse' : 'Choose file'}
         </button>
 
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/png,image/jpeg,image/webp"
+          accept="image/*"
           className="hidden"
           onChange={(e) => {
             const file = e.target.files?.[0];
