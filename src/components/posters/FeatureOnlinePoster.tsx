@@ -31,16 +31,15 @@ export function FeatureOnlinePoster({ data }: Props) {
 function SpeakerBlock({ speaker }: { speaker: SpeakerProfile }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <Headshot src={speaker.headshotUrl} size={280} />
-      <div className="mt-5 font-display text-3xl">
+      <Headshot src={speaker.headshotUrl} size={420} ringWidth={8} />
+      <div className="mt-6 font-display text-4xl leading-tight">
         {speaker.name || 'SPEAKER NAME'}
       </div>
-      <div className="text-lg text-white/85">{speaker.business || 'Business'}</div>
-      <div className="mt-1 text-bni-gold text-base tracking-[0.25em] font-semibold">
-        {speaker.category || 'CATEGORY'}
+      <div className="mt-2 text-2xl text-white/90 leading-tight">
+        {speaker.business || 'Business'}
       </div>
-      <div className="mt-3 px-2 font-display text-2xl leading-tight">
-        {speaker.topic ? `"${speaker.topic}"` : '[TOPIC]'}
+      <div className="mt-2 text-bni-gold text-lg tracking-[0.25em] font-semibold">
+        {speaker.category || 'CATEGORY'}
       </div>
     </div>
   );

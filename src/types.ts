@@ -21,7 +21,6 @@ export interface SpeakerProfile {
   name: string;
   business: string;
   category: string;
-  topic: string;
 }
 
 export interface FeatureOnlineData {

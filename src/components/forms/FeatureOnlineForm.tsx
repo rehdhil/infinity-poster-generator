@@ -54,8 +54,6 @@ function SpeakerFields({
         onChange={(e) => onChange({ ...value, business: e.target.value })} />
       <input className="form-input" placeholder="Category" value={value.category}
         onChange={(e) => onChange({ ...value, category: e.target.value })} />
-      <input className="form-input" placeholder="Topic"
-        value={value.topic} onChange={(e) => onChange({ ...value, topic: e.target.value })} />
     </fieldset>
   );
 }

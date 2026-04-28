@@ -16,7 +16,6 @@ const emptySpeaker = () => ({
   name: '',
   business: '',
   category: '',
-  topic: '',
 });
 
 const emptyMember = () => ({ headshotUrl: '', name: '' });
