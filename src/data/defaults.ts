@@ -29,6 +29,11 @@ export const EVENTS_COORDINATORS = [
   { name: 'Nabeela Sait', phone: '+91 9746 422 244' },
 ] as const;
 
+export const TRAINING_COORDINATOR = {
+  name: 'Harish R',
+  phone: '+91 9847 760 582',
+} as const;
+
 export const DEFAULTS = {
   openCategories: {
     categories: empty(12),

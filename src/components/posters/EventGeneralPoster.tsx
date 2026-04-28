@@ -2,7 +2,7 @@ import type { EventGeneralData } from '../../types';
 import { PosterHeader } from '../shared/PosterHeader';
 import { PosterFooter } from '../shared/PosterFooter';
 import { VenueImage } from '../shared/VenueImage';
-import { EVENTS_COORDINATORS } from '../../data/defaults';
+import { EVENTS_COORDINATORS, TRAINING_COORDINATOR } from '../../data/defaults';
 
 type Props = { data: EventGeneralData };
 
@@ -40,6 +40,17 @@ export function EventGeneralPoster({ data }: Props) {
       )}
 
       <PosterFooter meetingDate={data.date}>
+        {data.categoryLabel === 'TRAINING' && (
+          <div className="text-center mb-3 pb-3 border-b border-white/10">
+            <div className="text-bni-gold text-[11px] tracking-[0.4em] font-semibold mb-1">
+              TRAINING COORDINATOR
+            </div>
+            <div className="font-display text-xl tracking-wide">
+              {TRAINING_COORDINATOR.name.toUpperCase()}
+            </div>
+            <div className="text-sm text-white/75">{TRAINING_COORDINATOR.phone}</div>
+          </div>
+        )}
         <div className="grid grid-cols-3 gap-3 text-center">
           {EVENTS_COORDINATORS.map((c) => (
             <div key={c.name}>
