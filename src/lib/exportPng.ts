@@ -5,6 +5,16 @@ export async function exportPosterPng(
   node: HTMLElement,
   filename: string,
 ): Promise<void> {
+  // Diagnostic: log every image's src so we can find broken refs.
+  const imgs = node.querySelectorAll('img');
+  const srcSummary = Array.from(imgs).map((img, i) => ({
+    idx: i,
+    src: img.src,
+    complete: img.complete,
+    naturalWidth: img.naturalWidth,
+  }));
+  console.log('[exportPosterPng] images in export tree:', srcSummary);
+
   const dataUrl = await toPng(node, {
     width: POSTER_WIDTH,
     height: POSTER_HEIGHT,
