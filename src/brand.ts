@@ -12,7 +12,7 @@ export const POSTER_DIMENSIONS: Record<PosterKind, { width: number; height: numb
   'networking': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
   'education': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
   'event-general': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
-  'event-speaker': { width: POSTER_WIDTH, height: POSTER_HEIGHT },
+  'event-speaker': { width: 1080, height: 1080 },
   'theme': { width: 1080, height: 1080 },
 };
 
