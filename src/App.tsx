@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import type { PosterKind } from './types';
 import { DEFAULTS } from './data/defaults';
+import { POSTER_DIMENSIONS } from './brand';
 import { PosterFrame } from './components/PosterFrame';
 import { TemplatePicker } from './components/TemplatePicker';
 import { DownloadButton } from './components/DownloadButton';
@@ -12,6 +13,7 @@ import { NetworkingPoster } from './components/posters/NetworkingPoster';
 import { EducationPoster } from './components/posters/EducationPoster';
 import { EventGeneralPoster } from './components/posters/EventGeneralPoster';
 import { EventSpeakerPoster } from './components/posters/EventSpeakerPoster';
+import { ThemePoster } from './components/posters/ThemePoster';
 
 import { OpenCategoriesForm } from './components/forms/OpenCategoriesForm';
 import { FeatureOnlineForm } from './components/forms/FeatureOnlineForm';
@@ -20,6 +22,7 @@ import { NetworkingForm } from './components/forms/NetworkingForm';
 import { EducationForm } from './components/forms/EducationForm';
 import { EventGeneralForm } from './components/forms/EventGeneralForm';
 import { EventSpeakerForm } from './components/forms/EventSpeakerForm';
+import { ThemeForm } from './components/forms/ThemeForm';
 
 const FILENAMES: Record<PosterKind, string> = {
   'open-categories': 'bni-open-categories',
@@ -29,6 +32,7 @@ const FILENAMES: Record<PosterKind, string> = {
   'education': 'bni-education',
   'event-general': 'bni-event-general',
   'event-speaker': 'bni-event-speaker',
+  'theme': 'bni-30sec-theme',
 };
 
 export default function App() {
@@ -42,6 +46,13 @@ export default function App() {
   const [education, setEducation] = useState(DEFAULTS.education);
   const [eventGeneral, setEventGeneral] = useState(DEFAULTS.eventGeneral);
   const [eventSpeaker, setEventSpeaker] = useState(DEFAULTS.eventSpeaker);
+  const [theme, setTheme] = useState(DEFAULTS.theme);
+
+  const dimensions = POSTER_DIMENSIONS[kind];
+
+  // Preview scale: a square (1080x1080) at 0.4 takes 432px on each axis.
+  // Vertical (1080x1920) at 0.4 takes 432x768. Same width, taller. OK.
+  const previewScale = 0.4;
 
   const renderPoster = () => {
     switch (kind) {
@@ -52,6 +63,7 @@ export default function App() {
       case 'education': return <EducationPoster data={education} />;
       case 'event-general': return <EventGeneralPoster data={eventGeneral} />;
       case 'event-speaker': return <EventSpeakerPoster data={eventSpeaker} />;
+      case 'theme': return <ThemePoster data={theme} />;
     }
   };
 
@@ -64,6 +76,7 @@ export default function App() {
       case 'education': return <EducationForm data={education} onChange={setEducation} />;
       case 'event-general': return <EventGeneralForm data={eventGeneral} onChange={setEventGeneral} />;
       case 'event-speaker': return <EventSpeakerForm data={eventSpeaker} onChange={setEventSpeaker} />;
+      case 'theme': return <ThemeForm data={theme} onChange={setTheme} />;
     }
   };
 
@@ -74,7 +87,7 @@ export default function App() {
           BNI Infinity Poster Generator
         </h1>
         <p className="text-white/60 text-sm mt-1">
-          Pick a template, fill the form, download the WhatsApp Status poster.
+          Pick a template, fill the form, download the poster.
         </p>
       </header>
 
@@ -84,12 +97,21 @@ export default function App() {
         <div className="rounded-xl border border-white/10 bg-white/5 p-5">
           {renderForm()}
           <div className="mt-6">
-            <DownloadButton targetRef={targetRef} filename={FILENAMES[kind]} />
+            <DownloadButton
+              targetRef={targetRef}
+              filename={FILENAMES[kind]}
+              dimensions={dimensions}
+            />
           </div>
         </div>
 
         <div className="flex justify-center">
-          <PosterFrame ref={targetRef} previewScale={0.4}>
+          <PosterFrame
+            ref={targetRef}
+            previewScale={previewScale}
+            width={dimensions.width}
+            height={dimensions.height}
+          >
             {renderPoster()}
           </PosterFrame>
         </div>

@@ -3,25 +3,29 @@ import { POSTER_HEIGHT, POSTER_WIDTH, GRADIENT_BG, ACCENT_GLOW } from '../brand'
 
 type Props = {
   children: ReactNode;
-  /** Visible CSS scale for preview. The export node keeps real 1080×1920 dimensions. */
+  /** Visible CSS scale for preview. The export node keeps real pixel dimensions. */
   previewScale?: number;
+  /** Canvas width in real pixels. Defaults to vertical poster width. */
+  width?: number;
+  /** Canvas height in real pixels. Defaults to vertical poster height. */
+  height?: number;
 };
 
 export const PosterFrame = forwardRef<HTMLDivElement, Props>(
-  ({ children, previewScale = 0.4 }, ref) => {
+  ({ children, previewScale = 0.4, width = POSTER_WIDTH, height = POSTER_HEIGHT }, ref) => {
     return (
       <div
         style={{
-          width: POSTER_WIDTH * previewScale,
-          height: POSTER_HEIGHT * previewScale,
+          width: width * previewScale,
+          height: height * previewScale,
         }}
         className="relative overflow-hidden rounded-2xl shadow-2xl"
       >
         <div
           ref={ref}
           style={{
-            width: POSTER_WIDTH,
-            height: POSTER_HEIGHT,
+            width,
+            height,
             background: GRADIENT_BG,
             transform: `scale(${previewScale})`,
             transformOrigin: 'top left',

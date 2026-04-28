@@ -5,7 +5,8 @@ export type PosterKind =
   | 'networking'
   | 'education'
   | 'event-general'
-  | 'event-speaker';
+  | 'event-speaker'
+  | 'theme';
 
 export interface OpenCategoriesData {
   categories: string[];
@@ -84,6 +85,15 @@ export interface EventSpeakerData {
   time: string;
   venue: string;
   venueImageUrl?: string;
+}
+
+export interface ThemeData {
+  meetingDate: string;
+  time: string;
+  theme: string;
+  description: string;
+  coordinatorName: string;
+  coordinatorPhone: string;
 }
 
 export interface ChapterMember {

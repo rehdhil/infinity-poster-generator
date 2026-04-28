@@ -6,6 +6,7 @@ import type {
   EducationData,
   EventGeneralData,
   EventSpeakerData,
+  ThemeData,
 } from '../types';
 
 const empty = (n: number): string[] => Array.from({ length: n }, () => '');
@@ -88,4 +89,13 @@ export const DEFAULTS = {
     time: '7:00 PM',
     venue: '',
   } satisfies EventSpeakerData,
+
+  theme: {
+    meetingDate: '',
+    time: DEFAULT_TIME,
+    theme: '',
+    description: '',
+    coordinatorName: 'Shinju Lawrence',
+    coordinatorPhone: '+91 9074 869 201',
+  } satisfies ThemeData,
 };

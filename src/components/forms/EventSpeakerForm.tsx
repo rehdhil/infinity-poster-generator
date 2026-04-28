@@ -6,7 +6,7 @@ type Props = {
   onChange: (next: EventSpeakerData) => void;
 };
 
-const TYPES = ['GUEST SPEAKER', 'TRAINING SESSION', 'WORKSHOP', 'EDUCATION SUMMIT'];
+const TYPES = ['GUEST SPEAKER', 'TRAINING SESSION', 'WORKSHOP', 'KNOWLEDGE SESSION'];
 
 export function EventSpeakerForm({ data, onChange }: Props) {
   const set = <K extends keyof EventSpeakerData>(k: K, v: EventSpeakerData[K]) =>

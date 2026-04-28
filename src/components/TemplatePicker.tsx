@@ -8,6 +8,7 @@ const TEMPLATES: { kind: PosterKind; label: string }[] = [
   { kind: 'education', label: 'Education Slot' },
   { kind: 'event-general', label: 'Event — General' },
   { kind: 'event-speaker', label: 'Event — Speaker' },
+  { kind: 'theme', label: '30-Second Theme' },
 ];
 
 type Props = {

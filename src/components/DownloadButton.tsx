@@ -4,9 +4,10 @@ import { exportPosterPng } from '../lib/exportPng';
 type Props = {
   targetRef: React.RefObject<HTMLDivElement | null>;
   filename: string;
+  dimensions: { width: number; height: number };
 };
 
-export function DownloadButton({ targetRef, filename }: Props) {
+export function DownloadButton({ targetRef, filename, dimensions }: Props) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +20,7 @@ export function DownloadButton({ targetRef, filename }: Props) {
           setError(null);
           setBusy(true);
           try {
-            await exportPosterPng(targetRef.current, filename);
+            await exportPosterPng(targetRef.current, filename, dimensions);
           } catch (e) {
             console.error('Export failed:', e);
             let msg: string;

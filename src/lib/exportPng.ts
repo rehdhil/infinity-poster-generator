@@ -1,5 +1,4 @@
 import { toPng } from 'html-to-image';
-import { POSTER_HEIGHT, POSTER_WIDTH } from '../brand';
 
 /**
  * An <img> with an empty/root src will reject html-to-image's load wait.
@@ -19,6 +18,7 @@ function isBadSrc(img: HTMLImageElement): boolean {
 export async function exportPosterPng(
   node: HTMLElement,
   filename: string,
+  dimensions: { width: number; height: number },
 ): Promise<void> {
   const imgs = Array.from(node.querySelectorAll('img'));
   const badImgs = imgs.filter(isBadSrc);
@@ -33,8 +33,8 @@ export async function exportPosterPng(
 
   try {
     const dataUrl = await toPng(node, {
-      width: POSTER_WIDTH,
-      height: POSTER_HEIGHT,
+      width: dimensions.width,
+      height: dimensions.height,
       pixelRatio: 1,
       style: {
         transform: 'scale(1)',
