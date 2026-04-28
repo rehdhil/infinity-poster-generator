@@ -6,7 +6,7 @@ export function PosterHeader({ label }: Props) {
       <img
         src="/logos/bni-infinity-white.png"
         alt="BNI Infinity"
-        className="h-32 w-auto mb-6 select-none"
+        className="h-[154px] w-auto mb-6 select-none"
       />
       <h1 className="font-display text-[110px] leading-none tracking-wide text-white text-center">
         {label}
