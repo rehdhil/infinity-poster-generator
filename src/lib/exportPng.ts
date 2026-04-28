@@ -9,7 +9,6 @@ export async function exportPosterPng(
     width: POSTER_WIDTH,
     height: POSTER_HEIGHT,
     pixelRatio: 1,
-    cacheBust: true,
     style: {
       transform: 'scale(1)',
       transformOrigin: 'top left',

@@ -22,7 +22,15 @@ export function DownloadButton({ targetRef, filename }: Props) {
             await exportPosterPng(targetRef.current, filename);
           } catch (e) {
             console.error('Export failed:', e);
-            setError(e instanceof Error ? e.message : String(e));
+            let msg: string;
+            if (e instanceof Error) {
+              msg = e.message;
+            } else if (e instanceof Event && e.target instanceof HTMLImageElement) {
+              msg = `Image failed to load: ${e.target.src.slice(0, 80)}`;
+            } else {
+              msg = String(e);
+            }
+            setError(msg);
           } finally {
             setBusy(false);
           }
