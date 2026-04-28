@@ -17,7 +17,7 @@ export function NetworkingPoster({ data }: Props) {
 
       {/* Hero: large topic quote — ~50% of canvas */}
       <div className="px-10 text-center">
-        <div className="font-display text-[88px] leading-none tracking-wide">
+        <div className="font-display text-[100px] leading-[1.05] tracking-wide">
           {data.topic ? `"${data.topic}"` : '[TOPIC]'}
         </div>
       </div>
@@ -37,7 +37,7 @@ export function NetworkingPoster({ data }: Props) {
         Online Networking Coordinators
       </div>
 
-      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-8 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 
@@ -49,7 +49,7 @@ export function NetworkingPoster({ data }: Props) {
 function HostBlock({ host }: { host: HostProfile }) {
   return (
     <div className="flex flex-col items-center">
-      <Headshot src={host.headshotUrl} size={240} />
+      <Headshot src={host.headshotUrl} size={300} />
       <div className="mt-4 font-display text-3xl text-center">
         {host.name || 'HOST NAME'}
       </div>

@@ -8,7 +8,7 @@ type Props = {
 
 export function PosterFooter({ meetingDate, children }: Props) {
   return (
-    <footer className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/40 backdrop-blur-sm">
+    <footer className="border-t border-white/10 bg-black/40 backdrop-blur-sm">
       {children && <div className="px-12 py-6">{children}</div>}
       <div className="flex items-center justify-between px-12 py-5">
         <div className="font-display text-2xl tracking-[0.3em] text-white">

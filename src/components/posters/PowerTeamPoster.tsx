@@ -54,7 +54,7 @@ export function PowerTeamPoster({ data }: Props) {
         ))}
       </div>
 
-      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-8 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         HOLIDAY INN COCHIN • {data.time}
       </div>
 

@@ -13,11 +13,11 @@ export function EducationPoster({ data }: Props) {
 
       {/* Hero: large central headshot */}
       <div className="mx-auto mt-2">
-        <Headshot src={data.headshotUrl} size={360} ringWidth={8} />
+        <Headshot src={data.headshotUrl} size={420} ringWidth={8} />
       </div>
 
-      <div className="text-center mt-6">
-        <div className="font-display text-6xl tracking-wide">
+      <div className="text-center mt-5">
+        <div className="font-display text-[64px] leading-tight tracking-wide">
           {data.speakerName || 'SPEAKER NAME'}
         </div>
         <div className="text-bni-gold text-xl tracking-[0.3em] mt-2">
@@ -32,12 +32,12 @@ export function EducationPoster({ data }: Props) {
       </div>
 
       <div className="px-10 text-center">
-        <div className="font-display text-[76px] leading-none tracking-wide">
+        <div className="font-display text-[88px] leading-[1.05] tracking-wide">
           {data.topic ? `"${data.topic}"` : '[TOPIC]'}
         </div>
       </div>
 
-      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-8 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 

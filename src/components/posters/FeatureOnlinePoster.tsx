@@ -20,7 +20,7 @@ export function FeatureOnlinePoster({ data }: Props) {
         <SpeakerBlock speaker={data.speakerTwo} />
       </div>
 
-      <div className="mt-auto mb-16 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
+      <div className="mt-auto mb-8 text-center font-display text-3xl tracking-[0.3em] text-bni-red">
         JOIN ONLINE • {data.time}
       </div>
 

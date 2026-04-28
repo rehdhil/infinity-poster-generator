@@ -31,7 +31,7 @@ export function OpenCategoriesPoster({ data }: Props) {
         </h2>
       </div>
 
-      <div className="mt-auto mb-56 text-center font-display text-3xl tracking-[0.3em] text-white/85">
+      <div className="mt-auto mb-8 text-center font-display text-3xl tracking-[0.3em] text-white/85">
         VISIT US WED • {data.time}
       </div>
 
