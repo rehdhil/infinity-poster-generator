@@ -6,3 +6,9 @@
 body {
   @apply bg-neutral-950 text-white font-body;
 }
+
+@layer components {
+  .form-input {
+    @apply w-full rounded-md border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-bni-red focus:outline-none;
+  }
+}

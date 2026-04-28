@@ -1,0 +1,23 @@
+import { toPng } from 'html-to-image';
+import { POSTER_HEIGHT, POSTER_WIDTH } from '../brand';
+
+export async function exportPosterPng(
+  node: HTMLElement,
+  filename: string,
+): Promise<void> {
+  const dataUrl = await toPng(node, {
+    width: POSTER_WIDTH,
+    height: POSTER_HEIGHT,
+    pixelRatio: 1,
+    cacheBust: true,
+    style: {
+      transform: 'scale(1)',
+      transformOrigin: 'top left',
+    },
+  });
+
+  const link = document.createElement('a');
+  link.download = filename.endsWith('.png') ? filename : `${filename}.png`;
+  link.href = dataUrl;
+  link.click();
+}
