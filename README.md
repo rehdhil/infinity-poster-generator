@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# BNI Infinity Poster Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Self-serve generator for WhatsApp Status posters used by the **BNI Infinity Cochin** chapter. Coordinators pick a template, fill the form, and download a 1080×1920 PNG ready to share.
 
-Currently, two official plugins are available:
+## Templates
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| # | Template | Use |
+|---|---|---|
+| 1 | Open Categories | Drive referrals to open seats |
+| 2 | Feature Presentation — Online | Weekly online meeting, 2 speakers |
+| 3 | Power Team Spotlight | Offline meeting, full power-team feature (5–12 members, adaptive layout) |
+| 4 | Networking Topic | Weekly networking session topic + hosts |
+| 5 | Education Slot | Weekly education slot speaker + topic |
+| 6 | Event — General | Chapter event flyer with optional venue photo |
+| 7 | Event — Speaker | Guest speaker / training event with optional venue photo |
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Member autocomplete** — typeahead over all 64 chapter members; selecting one auto-fills name, business, and category
+- **Adaptive Power Team layout** — headshots scale with member count (1–4 → large, 5–6 → medium, 7–9 → small, 10–12 → compact)
+- **Optional venue images** — upload a venue photo for event posters; the layout falls back gracefully when absent
+- **Per-speaker topics** on Feature Presentation (each speaker presents about their own business)
+- **Editable meeting time** on every form (default `7:30 AM`)
+- **Live preview** — see the poster update as you type
+- **Client-side PNG export** — no backend, no upload, no auth
 
-## Expanding the ESLint configuration
+## Local development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the local URL Vite prints. Click through the 7 template buttons in the picker to confirm each renders.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Production build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
+
+## Tech stack
+
+- React 19 + Vite 8 + TypeScript
+- Tailwind CSS 3 (brand tokens locked in `tailwind.config.ts`)
+- `html-to-image` for client-side PNG export
+- Google Fonts: Bebas Neue (display) + Inter (body)
+- Vitest + jsdom (export-pipeline smoke test)
+
+## Deploy
+
+Deployed to Vercel. Push to `main` triggers automatic redeploy.
+
+## Brand reference
+
+Colors: `#CF2030` (BNI red), `#0A0A0A` (black), `#D4A437` (gold), `#FFFFFF` (white).
+Logos: `public/logos/bni-infinity-white.png`, `public/logos/bni-reworked.png`.
