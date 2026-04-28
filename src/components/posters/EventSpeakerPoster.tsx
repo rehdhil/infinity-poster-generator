@@ -10,6 +10,7 @@ type Props = { data: EventSpeakerData };
 
 export function EventSpeakerPoster({ data }: Props) {
   const hasTwo = !!data.speakerTwo;
+  const dateLine = [data.date, data.time].filter((s) => s.trim()).join('  •  ');
 
   return (
     <div className="flex h-full flex-col">
@@ -32,18 +33,20 @@ export function EventSpeakerPoster({ data }: Props) {
         </div>
       )}
 
-      <div className="px-10 text-center">
-        <div className="font-display text-[68px] leading-tight tracking-wide">
-          {data.talkTitle ? `"${data.talkTitle}"` : '[TALK TITLE]'}
+      {data.talkTitle && (
+        <div className="px-10 text-center">
+          <div className="font-display text-[68px] leading-tight tracking-wide">
+            {`"${data.talkTitle}"`}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="text-center mt-8 text-2xl text-white/95">
-        {(data.date || '[DATE]') + '  •  ' + (data.time || '[TIME]')}
-      </div>
-      <div className="text-center mt-2 text-xl text-white/85">
-        📍 {data.venue || '[VENUE]'}
-      </div>
+      {dateLine && (
+        <div className="text-center mt-8 text-2xl text-white/95">{dateLine}</div>
+      )}
+      {data.venue && (
+        <div className="text-center mt-2 text-xl text-white/85">📍 {data.venue}</div>
+      )}
 
       <PosterFooter meetingDate={data.date}>
         <div className="grid grid-cols-3 gap-3 text-center">
@@ -74,12 +77,16 @@ function SpeakerBlock({
   return (
     <div className={wrapper}>
       <Headshot src={speaker.headshotUrl} size={size} ringWidth={size >= 360 ? 8 : 6} />
-      <div className={`mt-5 font-display ${nameSize} tracking-wide leading-tight`}>
-        {speaker.name || 'SPEAKER NAME'}
-      </div>
-      <div className={`text-bni-gold ${desigSize} tracking-[0.3em] mt-2 leading-tight`}>
-        {speaker.designation || 'Designation'}
-      </div>
+      {speaker.name && (
+        <div className={`mt-5 font-display ${nameSize} tracking-wide leading-tight`}>
+          {speaker.name}
+        </div>
+      )}
+      {speaker.designation && (
+        <div className={`text-bni-gold ${desigSize} tracking-[0.3em] mt-2 leading-tight`}>
+          {speaker.designation}
+        </div>
+      )}
     </div>
   );
 }

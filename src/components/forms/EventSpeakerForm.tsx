@@ -46,17 +46,17 @@ export function EventSpeakerForm({ data, onChange }: Props) {
         </button>
       )}
 
-      <input className="form-input" placeholder="Talk title"
+      <input className="form-input" placeholder="Talk title (optional)"
         value={data.talkTitle} onChange={(e) => set('talkTitle', e.target.value)} />
-      <input className="form-input" placeholder="Date"
+      <input className="form-input" placeholder="Date (optional)"
         value={data.date} onChange={(e) => set('date', e.target.value)} />
-      <input className="form-input" placeholder="Time"
+      <input className="form-input" placeholder="Time (optional)"
         value={data.time} onChange={(e) => set('time', e.target.value)} />
-      <input className="form-input" placeholder="Venue"
+      <input className="form-input" placeholder="Venue (optional)"
         value={data.venue} onChange={(e) => set('venue', e.target.value)} />
-      <HeadshotInput label="Venue image" value={data.venueImageUrl ?? ''}
+      <HeadshotInput label="Venue image (optional)" value={data.venueImageUrl ?? ''}
         onChange={(url) => set('venueImageUrl', url)} />
-      <p className="text-xs text-white/50 -mt-2">Optional — leave empty for text-only.</p>
+      <p className="text-xs text-white/50 -mt-2">Empty fields are simply hidden on the poster.</p>
     </div>
   );
 }
@@ -90,7 +90,7 @@ function SpeakerFields({
         onChange={(headshotUrl) => onChange({ ...value, headshotUrl })} />
       <input className="form-input" placeholder="Speaker name" value={value.name}
         onChange={(e) => onChange({ ...value, name: e.target.value })} />
-      <input className="form-input" placeholder="Designation" value={value.designation}
+      <input className="form-input" placeholder="Designation (optional)" value={value.designation}
         onChange={(e) => onChange({ ...value, designation: e.target.value })} />
     </fieldset>
   );
