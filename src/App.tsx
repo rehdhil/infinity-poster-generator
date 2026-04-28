@@ -50,10 +50,6 @@ export default function App() {
 
   const dimensions = POSTER_DIMENSIONS[kind];
 
-  // Preview scale: a square (1080x1080) at 0.4 takes 432px on each axis.
-  // Vertical (1080x1920) at 0.4 takes 432x768. Same width, taller. OK.
-  const previewScale = 0.4;
-
   const renderPoster = () => {
     switch (kind) {
       case 'open-categories': return <OpenCategoriesPoster data={openCategories} />;
@@ -81,9 +77,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen p-6 lg:p-10">
-      <header className="mb-6">
-        <h1 className="font-display text-4xl tracking-wider">
+    <div className="min-h-dvh px-4 pb-10 pt-5 sm:px-6 lg:p-10">
+      <header className="mb-4 lg:mb-6">
+        <h1 className="font-display text-3xl sm:text-4xl tracking-wider leading-none">
           BNI Infinity Poster Generator
         </h1>
         <p className="text-white/60 text-sm mt-1">
@@ -93,8 +89,23 @@ export default function App() {
 
       <TemplatePicker active={kind} onChange={setKind} />
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[400px_1fr]">
-        <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+      <div className="mt-6 lg:mt-8 grid gap-6 lg:gap-8 lg:grid-cols-[400px_1fr]">
+        {/* Preview — first on mobile (visible immediately), right column on desktop */}
+        <div className="order-1 lg:order-2">
+          <div className="flex justify-center">
+            <PosterFrame
+              ref={targetRef}
+              width={dimensions.width}
+              height={dimensions.height}
+              maxPreviewWidth={432}
+            >
+              {renderPoster()}
+            </PosterFrame>
+          </div>
+        </div>
+
+        {/* Form */}
+        <div className="order-2 lg:order-1 rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5">
           {renderForm()}
           <div className="mt-6">
             <DownloadButton
@@ -103,17 +114,6 @@ export default function App() {
               dimensions={dimensions}
             />
           </div>
-        </div>
-
-        <div className="flex justify-center">
-          <PosterFrame
-            ref={targetRef}
-            previewScale={previewScale}
-            width={dimensions.width}
-            height={dimensions.height}
-          >
-            {renderPoster()}
-          </PosterFrame>
         </div>
       </div>
     </div>

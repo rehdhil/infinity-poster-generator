@@ -9,6 +9,7 @@ body {
 
 @layer components {
   .form-input {
-    @apply w-full rounded-md border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-bni-red focus:outline-none;
+    /* 16px font on mobile prevents iOS auto-zoom on focus; comfortable touch target ~44px */
+    @apply w-full rounded-md border border-white/15 bg-white/5 px-3 py-2.5 text-base text-white placeholder:text-white/30 focus:border-bni-red focus:outline-none sm:py-2 sm:text-sm;
   }
 }

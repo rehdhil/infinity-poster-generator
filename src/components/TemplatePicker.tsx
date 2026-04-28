@@ -24,10 +24,10 @@ export function TemplatePicker({ active, onChange }: Props) {
           key={t.kind}
           onClick={() => onChange(t.kind)}
           className={
-            'rounded-md border px-3 py-1.5 text-sm font-medium transition ' +
+            'rounded-md border px-3.5 py-2 text-sm font-medium transition active:scale-[0.97] ' +
             (active === t.kind
-              ? 'border-bni-red bg-bni-red text-white'
-              : 'border-white/15 bg-white/5 text-white/80 hover:border-white/40')
+              ? 'border-bni-red bg-bni-red text-white shadow-md'
+              : 'border-white/15 bg-white/5 text-white/85 hover:border-white/40')
           }
         >
           {t.label}
